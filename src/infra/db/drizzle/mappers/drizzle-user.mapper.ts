@@ -1,4 +1,4 @@
-import { User } from '@app/domain/entities/user';
+import { User } from '@domain/entities/user';
 import { user as DbUser } from '../schema/user';
 import { Injectable } from '@nestjs/common';
 

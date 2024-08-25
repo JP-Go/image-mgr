@@ -1,6 +1,6 @@
-import { User } from '@app/domain/entities/user';
-import { UserId } from '@app/domain/value-objects/user-id';
-import { UserRepository } from '@app/repositories/user.repository';
+import { User } from '@domain/entities/user';
+import { UserId } from '@domain/value-objects/user-id';
+import { UserRepository } from '@domain/repositories/user.repository';
 import * as schema from '../schema/user';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { Inject } from '@nestjs/common';

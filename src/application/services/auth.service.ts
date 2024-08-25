@@ -1,7 +1,8 @@
-import { UserRepository } from '@app/repositories/user.repository';
-import { User } from '../domain/entities/user';
+import { UserRepository } from '@domain/repositories/user.repository';
+import { User } from '@domain/entities/user';
 import { PasswordHasher } from './password-hasher';
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 export abstract class AuthService {
   abstract validateUser(credentials: {
@@ -9,6 +10,7 @@ export abstract class AuthService {
     password: string;
   }): Promise<User>;
   abstract singUp(user: User): Promise<User>;
+  abstract login(user: User): Promise<{ access_token: string }>;
 }
 
 // TODO: implement test for this service
@@ -18,6 +20,7 @@ export class GenericAuthService implements AuthService {
   constructor(
     private userRepository: UserRepository,
     private hasher: PasswordHasher,
+    private jwtService: JwtService,
   ) {}
 
   async validateUser({ email, password }): Promise<User | null> {
@@ -49,5 +52,12 @@ export class GenericAuthService implements AuthService {
       }),
     );
     return savedUser;
+  }
+
+  async login(user: User): Promise<{ access_token: string }> {
+    const payload = { sub: user.id.value, email: user.email };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

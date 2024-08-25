@@ -1,5 +1,5 @@
-import { User } from '../domain/entities/user';
-import { UserId } from '../domain/value-objects/user-id';
+import { User } from '@domain/entities/user';
+import { UserId } from '@domain/value-objects/user-id';
 
 /* Using abstract classes because Nest.Js requires a concrete JS Object to inject it */
 export abstract class UserRepository {

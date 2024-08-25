@@ -1,11 +1,11 @@
 import { Test } from '@nestjs/testing';
 import { DrizzleUserRepository } from './drizzle-user.repository';
-import { User } from '@app/domain/entities/user';
+import { User } from '@domain/entities/user';
 import { DatabaseModule } from '@infra/db/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { StartedTestContainer } from 'testcontainers';
 import { getDbContainer } from '@test/helpers/get-db-container';
-import { UserId } from '@app/domain/value-objects/user-id';
+import { UserId } from '@domain/value-objects/user-id';
 
 describe('DrizzleUserRepository spec', () => {
   let drizzleUserRepository: DrizzleUserRepository;
