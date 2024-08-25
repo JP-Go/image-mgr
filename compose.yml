@@ -1,0 +1,11 @@
+services:
+  img-mgr-db:
+    image: postgres
+    container_name: img-mgr-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: img-mgr
+      POSTGRES_PASSWORD: img-mgr
+      POSTGRES_DB: img-mgr

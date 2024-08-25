@@ -2,14 +2,16 @@ import { randomUUID } from 'crypto';
 import { validate } from 'uuid';
 
 export class UserId {
-  constructor(private readonly value?: string) {
+  private _value: string;
+
+  constructor(value: string | null) {
     if (!value) {
-      this.value = randomUUID();
+      this._value = randomUUID();
     } else {
       if (!this.isValid(value)) {
-        throw new Error('Invalid UUID');
+        this._value = null;
       }
-      this.value = value;
+      this._value = value;
     }
   }
 
@@ -29,6 +31,14 @@ export class UserId {
       return true;
     }
 
-    return this.value === other.value;
+    return this._value === other.value;
+  }
+
+  toString(): string {
+    return this._value;
+  }
+
+  get value() {
+    return this._value;
   }
 }
