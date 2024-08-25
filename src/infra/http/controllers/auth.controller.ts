@@ -18,13 +18,14 @@ export class AuthController {
 
   @Post('/sign-up')
   async signUp(@Body() signUpDto: SignUpDto) {
-    return this.authService.singUp(
+    const user = await this.authService.singUp(
       new User({
         password: signUpDto.password,
         email: signUpDto.email,
         username: signUpDto.username,
       }),
     );
+    return this.authService.login(user);
   }
 
   @UseGuards(JwtGuard)
