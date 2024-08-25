@@ -13,6 +13,14 @@ export class DrizzleUserRepository implements UserRepository {
     private readonly db: PostgresJsDatabase<typeof schema>,
   ) {}
 
+  // TODO: implement test for this method
+  async findByEmail(email: string): Promise<User | null> {
+    const dbUser = await this.db.query.user.findFirst({
+      where: eq(schema.user.email, email),
+    });
+    return DrizzleUserMapper.toDomain(dbUser);
+  }
+
   async findById(userId: UserId): Promise<User | null> {
     const dbUser = await this.db.query.user.findFirst({
       where: eq(schema.user.id, userId.toString()),
