@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user';
-import { UserId } from '@domain/value-objects/user-id';
+import { UUID } from '@domain/value-objects/uuid';
 import { UserRepository } from '@domain/repositories/user.repository';
 import * as schema from '../schema/user';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
@@ -21,14 +21,14 @@ export class DrizzleUserRepository implements UserRepository {
     return DrizzleUserMapper.toDomain(dbUser);
   }
 
-  async findById(userId: UserId): Promise<User | null> {
+  async findById(userId: UUID): Promise<User | null> {
     const dbUser = await this.db.query.user.findFirst({
       where: eq(schema.user.id, userId.toString()),
     });
     return DrizzleUserMapper.toDomain(dbUser);
   }
 
-  async delete(userId: UserId): Promise<void> {
+  async delete(userId: UUID): Promise<void> {
     await this.db
       .delete(schema.user)
       .where(eq(schema.user.id, userId.toString()));

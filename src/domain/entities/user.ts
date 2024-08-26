@@ -1,7 +1,7 @@
-import { UserId } from '../value-objects/user-id';
+import { UUID } from '../value-objects/uuid';
 
 export class User {
-  private _id: UserId;
+  private _id: UUID;
   private _username: string;
   private _email: string;
   private _password: string;
@@ -19,7 +19,7 @@ export class User {
     this._username = username;
     this._email = email;
     this._password = password;
-    this._id = new UserId(id);
+    this._id = new UUID(id);
   }
 
   get id() {
