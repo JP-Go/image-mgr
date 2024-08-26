@@ -1,7 +1,7 @@
 import { UserRepository } from '@domain/repositories/user.repository';
 import { User } from '@domain/entities/user';
 import { PasswordHasher } from './password-hasher';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 export abstract class AuthService {
@@ -40,7 +40,9 @@ export class GenericAuthService implements AuthService {
     const emailTaken =
       (await this.userRepository.findByEmail(user.email)) !== null;
     if (emailTaken) {
-      return this.validateUser(user);
+      throw new UnprocessableEntityException({
+        message: 'Email already taken',
+      });
     }
 
     const hashedPassword = await this.hasher.hash(user.password);

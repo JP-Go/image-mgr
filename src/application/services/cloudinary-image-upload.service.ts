@@ -54,7 +54,7 @@ export class CloudinaryImageUploadService implements ImageUploaderService {
     const imageUpload =
       await this.imageUploadRepository.findById(imageUploadId);
     if (imageUpload === null) {
-      throw new UnprocessableEntityException({
+      throw new NotFoundException({
         message: 'Image not found',
       });
     }

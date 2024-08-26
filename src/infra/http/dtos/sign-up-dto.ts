@@ -1,6 +1,11 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 export class SignUpDto {
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
   @IsNotEmpty({
     message: 'username is required',
   })
@@ -18,6 +23,10 @@ export class SignUpDto {
       message: 'Invalid email',
     },
   )
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
   email: string;
 
   @IsNotEmpty({
@@ -28,6 +37,10 @@ export class SignUpDto {
   })
   @MaxLength(255, {
     message: 'password must be at most 255 characters',
+  })
+  @ApiProperty({
+    required: true,
+    type: String,
   })
   password: string;
 }
