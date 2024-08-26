@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { validate } from 'uuid';
 
-export class UserId {
+export class UUID {
   private _value: string;
 
   constructor(value: string | null) {
@@ -15,15 +15,15 @@ export class UserId {
     }
   }
 
-  static new(): UserId {
-    return new UserId(randomUUID());
+  static new(): UUID {
+    return new UUID(randomUUID());
   }
 
   private isValid(value: string) {
     return validate(value);
   }
 
-  equals(other: UserId): boolean {
+  equals(other: UUID): boolean {
     if (other === null || other === undefined) {
       return false;
     }

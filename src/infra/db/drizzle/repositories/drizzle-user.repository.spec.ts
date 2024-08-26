@@ -5,7 +5,7 @@ import { DatabaseModule } from '@infra/db/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { StartedTestContainer } from 'testcontainers';
 import { getDbContainer } from '@test/helpers/get-db-container';
-import { UserId } from '@domain/value-objects/user-id';
+import { UUID } from '@domain/value-objects/uuid';
 
 describe('DrizzleUserRepository spec', () => {
   let drizzleUserRepository: DrizzleUserRepository;
@@ -41,7 +41,7 @@ describe('DrizzleUserRepository spec', () => {
 
   function createUserEntity(
     overrides?: Partial<{
-      id: UserId;
+      id: UUID;
       username: string;
       email: string;
       password: string;
@@ -96,7 +96,7 @@ describe('DrizzleUserRepository spec', () => {
     const rawUserId = user.id.value;
 
     const userToUpdate = createUserEntity({
-      id: new UserId(rawUserId),
+      id: new UUID(rawUserId),
       username: 'new-test',
       email: 'new-test',
       password: 'new-test',
